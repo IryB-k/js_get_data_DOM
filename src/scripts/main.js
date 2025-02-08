@@ -2,8 +2,11 @@
 
 const el = [...document.querySelectorAll('.population')];
 
-const populations = el.map((item) =>
-  Number(item.textContent.replaceAll(',', '')),);
+const populations = el.map((item) => {
+  const number = Number(item.textContent.replaceAll(',', ''));
+
+  return isNaN(number) ? 0 : number;
+});
 
 function getTotal() {
   let total = 0;
@@ -18,8 +21,10 @@ function getTotal() {
 function getAverage() {
   let sum = 0;
 
-  for (const country of populations) {
-    sum += country;
+  if (populations.length !== 0) {
+    for (const country of populations) {
+      sum += country;
+    }
   }
 
   return sum / populations.length;
